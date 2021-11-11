@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.ijob.mapper.UserMapper">
+    <sql id="table_name">ijob_user</sql>
+    <sql id="select_column">
+        user_id,user_name,user_password,user_email,user_privileges
+    </sql>
+    <sql id="select_withMission">
+        user_id,user_name,user_password,user_email,user_privileges
+    </sql>
+    <insert id="insertUser" parameterType="User">
+        insert into
+        <include refid="table_name"/>
+        (<include refid="select_column"/>)
+        values(#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
+        #{userPassword,jdbcType=INTEGER}, #{userEmail,jdbcType=VARCHAR},
+        #{userPrivileges,jdbcType=VARCHAR}
+        )
+    </insert>
+    <delete id="deleteUserById" parameterType="Integer">
+        delete from
+        <include refid="table_name"/>
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteUAC" parameterType="Integer">
+        delete from
+        user_course
+        where user_id = #{userId,jdbcType=VARCHAR}
+        and
+        course_id = #{courseId,jdbcType=VARCHAR}
+    </delete>
+    <update id="updateUserById" parameterType="User">
+        update
+        <include refid="table_name"></include>
+        set
+        user_name = #{userName,jdbcType=VARCHAR},
+        user_password = #{userPassword,jdbcType=VARCHAR},
+        user_email = #{userEmail,jdbcType=VARCHAR},
+        user_privilege = #{userPrivileges,jdbcType=VARCHAR}
+        where
+        user_id = #{userId,jdbcType=VARCHAR}
+    </update>
+    <select id="selectUserById" parameterType="String" resultMap="BaseMap">
+        select
+        <include refid="select_column"/>
+        from
+        <include refid="table_name"></include>
+        where user_id = #{userId}
+    </select>
+    <select id="selectLoginIdPass" resultMap="BaseMap">
+        select
+        *
+        from
+        <include refid="table_name"></include>
+        where
+        user_id = #{userId,jdbcType=VARCHAR}
+        and
+        user_password = #{userPassword,jdbcType=VARCHAR}
+    </select>
+    <select id="selectLoginPrivilege" resultMap="BaseMap">
+        select
+        *
+        from
+        <include refid="table_name"></include>
+        where
+        user_id = #{userId,jdbcType=VARCHAR}
+        and
+        user_privileges = #{userPrivileges,jdbcType=VARCHAR}
+    </select>
+    <select id="selectUserAll" resultMap="BaseMap">
+        select
+        <include refid="select_column"></include>
+        from
+        <include refid="table_name"></include>
+    </select>
+    <select id="selectUserWithMissionById" parameterType="String" resultMap="withMissionResultMap">
+        select *,
+        from
+        <include refid="table_name"></include>
+        inner join user_mission uam on ijob_user.user_id = uam.user_id
+        inner join ijob_mission im on uam.mission_id = im.mission_id
+        where
+        ijob_user.user_id =#{userId}
+    </select>
+    <select id="selectUserWithCourseById" parameterType="String" resultMap="withCourseResultMap">
+        select *,
+        from
+        <include refid="table_name"></include>
+        inner join user_course uac on ijob_user.user_id = uac.user_id
+        inner join ijob_course ic on uac.course_id = ic.course_id
+        where
+        ijob_user.user_id =#{userId}
+    </select>
+    <insert id="insertUAC" parameterType="UAC">
+        insert into user_course (user_id, course_id)
+        values (#{userId},#{courseId});
+    </insert>
+    <select id="getUAC" parameterType="UAC" resultType="UAC">
+        SELECT user_id,course_id
+        FROM user_course
+        WHERE user_id = #{userId}
+        and course_id=#{courseId}
+    </select>
+    <resultMap id="BaseMap" type="User">
+        <id column="user_id" property="userId"/>
+        <result property="userName" column="user_name"/>
+        <result property="userPassword" column="user_password"/>
+        <result property="userEmail" column="user_email"/>
+        <result property="userPrivileges" column="user_privileges"/>
+    </resultMap>
+    <resultMap id="withMissionResultMap" type="User">
+        <id column="user_id" property="userId"/>
+        <result property="userName" column="user_name"/>
+        <result property="userPassword" column="user_password"/>
+        <result property="userEmail" column="user_email"/>
+        <result property="userPrivileges" column="user_privileges"/>
+        <collection property="missions" ofType="Mission">
+            <id property="missionId" column="mission_id"/>
+            <result property="missionType" column="mission_type"/>
+            <result property="missionMessage" column="mission_message"/>
+            <result property="missionSalary" column="mission_salary"/>
+            <result property="missionDate" column="mission_date"/>
+            <result property="missionStatus" column="mission_status"/>
+        </collection>
+    </resultMap>
+    <resultMap id="withCourseResultMap" type="User">
+        <id column="user_id" property="userId"/>
+        <result property="userName" column="user_name"/>
+        <result property="userPassword" column="user_password"/>
+        <result property="userEmail" column="user_email"/>
+        <result property="userPrivileges" column="user_privileges"/>
+        <collection property="courses" ofType="Course">
+            <id property="courseId" column="course_id"/>
+            <result property="courseName" column="course_name"/>
+            <result property="courseLink" column="course_link"/>
+        </collection>
+    </resultMap>
+</mapper>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.ijob.mapper.MissionMapper">
+    <sql id="table_name">
+        ijob_mission
+    </sql>
+    <sql id="select_column">
+        mission_id,mission_type,mission_message,mission_salary,mission_date,mission_status
+    </sql>
+    <sql id="select_detail">
+        mission_id,mission_type,mission_detail,mission_salary,mission_date,mission_status
+    </sql>
+    <insert id="insertMission" parameterType="Mission">
+        insert into
+        <include refid="table_name"/>
+        (<include refid="select_column"/>)
+        values(#{missionId,jdbcType=VARCHAR}, #{missionType,jdbcType=CHAR},
+        #{missionMessage,jdbcType=VARCHAR}, #{missionSalary,jdbcType=VARCHAR},
+        #{missionDate,jdbcType=DATE}, #{missionStatus,jdbcType=VARCHAR}
+        )
+    </insert>
+    <delete id="deleteMissionById" parameterType="String">
+        delete from
+        <include refid="table_name"/>
+        where mission_id = #{missionId,jdbcType=VARCHAR}
+    </delete>
+    <update id="updateMissionById" parameterType="Mission">
+        update
+        <include refid="table_name"></include>
+        set
+        mission_id = #{missionId,jdbcType=VARCHAR},
+        mission_type = #{missionType,jdbcType=VARCHAR},
+        mission_message = #{missionMessage,jdbcType=VARCHAR},
+        mission_salary = #{missionSalary,jdbcType=VARCHAR},
+        mission_date = #{missionDate,jdbcType=DATE},
+        mission_status = #{missionStatus,jdbcType=VARCHAR}
+        where
+        mission_id = #{missionId,jdbcType=VARCHAR}
+    </update>
+    <select id="selectMissionById" parameterType="String" resultMap="BaseMap">
+        select
+        <include refid="select_column"/>
+        from
+        <include refid="table_name"></include>
+        where  mission_id = #{missionId,jdbcType=VARCHAR}
+    </select>
+    <select id="selectMissionDetail" parameterType="String" resultMap="BaseMap">
+        select
+        <include refid="select_detail"></include>
+        from
+        <include refid="table_name"></include>
+        where mission_id = #{missionId,jdbcType=VARCHAR}
+    </select>
+    <select id="selectMissionAll" resultMap="BaseMap">
+        select
+        <include refid="select_column"></include>
+        from
+        <include refid="table_name"></include>
+    </select>
+    <select id="selectMissionByStatus" parameterType="String" resultMap="BaseMap">
+        select
+        <include refid="select_column"/>
+        from
+        <include refid="table_name"></include>
+        where mission_status = #{missionStatus,jdbcType=VARCHAR}
+    </select>
+    <select id="selectMissionByType" parameterType="String" resultMap="BaseMap">
+        select
+        <include refid="select_column"/>
+        from
+        <include refid="table_name"></include>
+        mission_type = #{missionType,jdbcType=VARCHAR}
+    </select>
+    <select id="selectMissionCount" resultType="Integer">
+        select count(*)
+        from
+        <include refid="table_name"></include>
+    </select>
+    <select id="findByPage" parameterType="Map" resultMap="BaseMap">
+        select
+        <include refid="select_column"></include>
+        from
+        <include refid="table_name"></include>
+        <if test="start!=null and size!=null">
+            limit #{start}, #{size}
+        </if>
+    </select>
+    <resultMap id="BaseMap" type="Mission">
+        <id property="missionId" column="mission_id"/>
+        <result column="mission_type" property="missionType"/>
+        <result column="mission_message" property="missionMessage"/>
+        <result column="mission_salary" property="missionSalary"/>
+        <result column="mission_date" property="missionDate"/>
+        <result column="mission_status" property="missionStatus"/>
+        <result column="mission_detail" property="missionDetail"/>
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.ijob.mapper.CourseMapper">
+    <sql id="table_name">
+        ijob_course
+    </sql>
+    <sql id="select_column">
+        course_id, course_name, course_link
+    </sql>
+    <insert id="insertCourse" parameterType="Course">
+        insert into
+        <include refid="table_name"></include>
+        (<include refid="select_column"></include>)
+        values(
+        #{courseId,jdbcType=VARCHAR},#{courseName,jdbcType=VARCHAR},#{courseLink,jdbcType=VARCHAR},
+        #{coursePic,jdbcType=VARCHAR}
+        )
+    </insert>
+    <delete id="deleteCourseById" parameterType="String">
+        delete from
+        <include refid="table_name"></include>
+        where coure_id = #{courseId,jdbcType=VARCHAR}
+    </delete>
+    <update id="updateCourseById" parameterType="String">
+        update
+        <include refid="table_name"></include>
+        set
+        course_id = #{courseId,jdbcType=VARCHAR},
+        course_name = #{courseName,jdbcType=VARCHAR},
+        course_link = #{courseLink,jdbcType=VARCHAR},
+        coursePic = #{coursePic,jdbcType=VARCHAR}
+        where
+        course_id = #{courseId,jdbcType=VARCHAR}
+    </update>
+    <select id="selectCourseByName" parameterType="String" resultMap="BaseMap">
+        select
+        <include refid="select_column"></include>
+        from
+        <include refid="table_name"></include>
+        where
+        course_name = #{courseName,jdbcType=VARCHAR}
+    </select>
+    <select id="selectCourseById" parameterType="String" resultMap="BaseMap">
+        select
+        <include refid="select_column"></include>
+        from
+        <include refid="table_name"></include>
+        where
+        course_id = #{courseId}
+    </select>
+    <select id="findByPage" parameterType="Map" resultMap="BaseMap">
+        select
+        <include refid="select_column"></include>
+        from
+        <include refid="table_name"></include>
+        <if test="start!=null and size!=null">
+            limit #{start}, #{size}
+        </if>
+    </select>
+    <select id="selectCourseCount" resultType="Integer">
+        select count(*)
+        from
+        <include refid="table_name"></include>
+    </select>
+    <select id="findAllByCourseName" resultMap="BaseMap">
+        select *
+        from
+        <include refid="table_name"></include>
+        where course_name like concat('%',#{courseName},'%')
+    </select>
+    <resultMap id="BaseMap" type="Course">
+        <id property="courseId" column="course_id"/>
+        <result column="course_name" property="courseName"/>
+        <result column="course_link" property="courseLink"/>
+    </resultMap>
+</mapper>
