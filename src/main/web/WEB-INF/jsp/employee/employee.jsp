@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Employee</title>
+    <title>申请人</title>
     <style type="text/css">
         #menu {
             font:20px verdana, arial, sans-serif;
@@ -46,7 +46,8 @@
         <li><a href="#">首页</a></li>
         <li><a href="${pageContext.request.contextPath}/mission">委托</a></li>
         <li><a href="${pageContext.request.contextPath}/teach">教学</a></li>
-        <li><a href="#" style="width: 600px;text-align: right">登录</a></li>
+        <li><a href="${pageContext.request.contextPath}/getCommentList">博客</a></li>
+        <li><a href="${pageContext.request.contextPath}/logout.action" style="width: 450px;text-align: right">登出</a></li>
     </ul>
 </div>
 </body>

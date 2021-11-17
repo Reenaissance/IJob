@@ -13,23 +13,22 @@
         <include refid="table_name"></include>
         (<include refid="select_column"></include>)
         values(
-        #{courseId,jdbcType=VARCHAR},#{courseName,jdbcType=VARCHAR},#{courseLink,jdbcType=VARCHAR},
-        #{coursePic,jdbcType=VARCHAR}
+        #{courseId,jdbcType=VARCHAR},
+        #{courseName,jdbcType=VARCHAR},
+        #{courseLink,jdbcType=VARCHAR}
         )
     </insert>
     <delete id="deleteCourseById" parameterType="String">
         delete from
         <include refid="table_name"></include>
-        where coure_id = #{courseId,jdbcType=VARCHAR}
+        where course_id = #{courseId,jdbcType=VARCHAR}
     </delete>
     <update id="updateCourseById" parameterType="String">
         update
         <include refid="table_name"></include>
         set
-        course_id = #{courseId,jdbcType=VARCHAR},
         course_name = #{courseName,jdbcType=VARCHAR},
-        course_link = #{courseLink,jdbcType=VARCHAR},
-        coursePic = #{coursePic,jdbcType=VARCHAR}
+        course_link = #{courseLink,jdbcType=VARCHAR}
         where
         course_id = #{courseId,jdbcType=VARCHAR}
     </update>
@@ -40,6 +39,12 @@
         <include refid="table_name"></include>
         where
         course_name = #{courseName,jdbcType=VARCHAR}
+    </select>
+    <select id="findAll" resultMap="BaseMap">
+        select
+        <include refid="select_column"></include>
+        from
+        <include refid="table_name"></include>
     </select>
     <select id="selectCourseById" parameterType="String" resultMap="BaseMap">
         select

@@ -29,7 +29,6 @@
         update
         <include refid="table_name"></include>
         set
-        mission_id = #{missionId,jdbcType=VARCHAR},
         mission_type = #{missionType,jdbcType=VARCHAR},
         mission_message = #{missionMessage,jdbcType=VARCHAR},
         mission_salary = #{missionSalary,jdbcType=VARCHAR},
@@ -38,12 +37,20 @@
         where
         mission_id = #{missionId,jdbcType=VARCHAR}
     </update>
+    <update id="updateMissionStatus" parameterType="String">
+        UPDATE
+        <include refid="table_name"></include>
+        SET
+        mission_status = '已完成'
+        WHERE
+        mission_id = #{missionId,jdbcType=VARCHAR}
+    </update>
     <select id="selectMissionById" parameterType="String" resultMap="BaseMap">
         select
         <include refid="select_column"/>
         from
         <include refid="table_name"></include>
-        where  mission_id = #{missionId,jdbcType=VARCHAR}
+        where mission_id = #{missionId,jdbcType=VARCHAR}
     </select>
     <select id="selectMissionDetail" parameterType="String" resultMap="BaseMap">
         select
@@ -86,6 +93,7 @@
             limit #{start}, #{size}
         </if>
     </select>
+
     <resultMap id="BaseMap" type="Mission">
         <id property="missionId" column="mission_id"/>
         <result column="mission_type" property="missionType"/>

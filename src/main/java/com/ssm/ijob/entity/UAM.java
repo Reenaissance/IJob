@@ -5,9 +5,6 @@ package com.ssm.ijob.entity;
  * @date 2021/10/17 20:30
  */
 
-/*
-多对多？
- */
 public class UAM {
     private String userId;
     private String missionId;

@@ -18,4 +18,5 @@ public interface CourseService {
     Course selectCourseById(String courseId);
     PageBean<Course> findByPage(int currentPage);
     List<Course> findAllByCourseName(String courseName);
+    List<Course> findAll();
 }

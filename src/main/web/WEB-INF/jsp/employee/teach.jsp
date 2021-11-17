@@ -72,9 +72,9 @@
         <div id="menu">
             <ul>
                 <li><a href="${pageContext.request.contextPath}/allCourse" target="show">所有课程</a></li>
-                <li><a href="/IJob/teach/${user.userId}&tab=allCourse" target="show">我的收藏</a></li>
-                <li><a href="/IJob/teach/${user.userId}&tab=allCourse" target="show">课程报错</a></li>
-                <li><a href="/IJob/teach/${user.userId}&tab=allCourse" target="show">浏览历史</a></li>
+                <li><a href="${pageContext.request.contextPath}/showCollect" target="show">我的收藏</a></li>
+                <li><a href="#" >课程报错</a></li>
+                <li><a href="#" >浏览历史</a></li>
             </ul>
         </div>
         <div id="be">

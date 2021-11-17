@@ -28,7 +28,6 @@
     <mvc:resources location="/css/" mapping="/css/**" />
     <mvc:resources location="/css/admin/" mapping="/css/admin/**" />
 
-    <!--1.在web.xml中配置监听器-->
 
 
 </beans>

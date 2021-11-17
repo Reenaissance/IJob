@@ -75,7 +75,8 @@
         <li><a href="#">首页</a></li>
         <li><a href="${pageContext.request.contextPath}/mission">委托</a></li>
         <li><a href="${pageContext.request.contextPath}/teach">教学</a></li>
-        <li><a href="#" style="width: 600px;text-align: right">登录</a></li>
+        <li><a href="${pageContext.request.contextPath}/logout.action" style="width: 600px;text-align: right">登出</a></li>
+
     </ul>
 </div>
 <hr>
@@ -103,7 +104,7 @@
                 <th>${m.missionSalary }</th>
                 <th><fmt:formatDate value="${m.missionDate}" type="date"/></th>
                 <th>${m.missionStatus }</th>
-                <th><a href="/IJob/detail/${m.missionId}">More</a></th>
+                <th><a href="${pageContext.request.contextPath}/detail/${m.missionId}">More</a></th>
             </tr>
         </c:forEach>
     </table>

@@ -28,10 +28,7 @@
     <div class="panel-heading">
         <h3 class="panel-title">课程列表</h3>
     </div>
-    <div class="panel-body form-inline">
-        <label>搜索名称关键字：<input type="text" class="form-control" placeholder="请输入要搜索的课程名称" id="course_name"></label>
-        <button class="btn btn-primary" onclick="search()">搜索</button>
-    </div>
+
 </div>
 </body>
 </html>

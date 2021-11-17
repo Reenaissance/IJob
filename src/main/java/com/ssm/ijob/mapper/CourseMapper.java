@@ -20,5 +20,5 @@ public interface CourseMapper {
     List<Course> findByPage(HashMap<String,Object> map);
     int selectCourseCount();
     List<Course> findAllByCourseName(String courseName);
-
+    List<Course> findAll();
 }

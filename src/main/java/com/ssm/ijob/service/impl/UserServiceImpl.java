@@ -51,6 +51,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User selectMissionByMissionId(String missionId) {
+        return this.userMapper.selectMissionByMissionId(missionId);
+    }
+
+    @Override
     public User selectUserWithCourseById(String id) {
         return this.userMapper.selectUserWithCourseById(id);
     }
@@ -66,17 +71,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int insertUAC(UAC uac) {
-        return this.userMapper.insertUAC(uac);
-    }
-
-    @Override
-    public UAC getUAC(String userId, String courseId) {
-        return this.userMapper.getUAC(userId,courseId);
-    }
-
-    @Override
-    public int deleteUAC(UAC uac) {
-        return this.userMapper.deleteUAC(uac);
+    public User selectUserByName(String userName) {
+        return this.userMapper.selectUserByName(userName);
     }
 }

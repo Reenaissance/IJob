@@ -55,6 +55,11 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public List<Course> findAll() {
+        return this.courseMapper.findAll();
+    }
+
+    @Override
     public PageBean<Course> findByPage(int currentPage) {
         HashMap<String,Object> map = new HashMap<>();
         PageBean<Course> pageBean = new PageBean<>();

@@ -30,6 +30,11 @@ public class MissionServiceImpl implements MissionService {
     }
 
     @Override
+    public int updateMissionStatus(String missionId) {
+        return this.missionMapper.updateMissionStatus(missionId);
+    }
+
+    @Override
     public int deleteMissionById(String id) {
         return this.missionMapper.deleteMissionById(id);
     }

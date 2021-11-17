@@ -18,18 +18,12 @@
         #{userPrivileges,jdbcType=VARCHAR}
         )
     </insert>
-    <delete id="deleteUserById" parameterType="Integer">
+    <delete id="deleteUserById" parameterType="String">
         delete from
         <include refid="table_name"/>
         where user_id = #{userId,jdbcType=VARCHAR}
     </delete>
-    <delete id="deleteUAC" parameterType="Integer">
-        delete from
-        user_course
-        where user_id = #{userId,jdbcType=VARCHAR}
-        and
-        course_id = #{courseId,jdbcType=VARCHAR}
-    </delete>
+
     <update id="updateUserById" parameterType="User">
         update
         <include refid="table_name"></include>
@@ -37,7 +31,7 @@
         user_name = #{userName,jdbcType=VARCHAR},
         user_password = #{userPassword,jdbcType=VARCHAR},
         user_email = #{userEmail,jdbcType=VARCHAR},
-        user_privilege = #{userPrivileges,jdbcType=VARCHAR}
+        user_privileges = #{userPrivileges,jdbcType=VARCHAR}
         where
         user_id = #{userId,jdbcType=VARCHAR}
     </update>
@@ -47,6 +41,13 @@
         from
         <include refid="table_name"></include>
         where user_id = #{userId}
+    </select>
+    <select id="selectUserByName" parameterType="String" resultMap="BaseMap">
+        select
+        <include refid="select_column"/>
+        from
+        <include refid="table_name"></include>
+        where user_name = #{userName}
     </select>
     <select id="selectLoginIdPass" resultMap="BaseMap">
         select
@@ -75,16 +76,16 @@
         <include refid="table_name"></include>
     </select>
     <select id="selectUserWithMissionById" parameterType="String" resultMap="withMissionResultMap">
-        select *,
-        from
-        <include refid="table_name"></include>
-        inner join user_mission uam on ijob_user.user_id = uam.user_id
+        select iu.user_id, iu.user_privileges, im.* from
+        ijob_user iu
+        inner join user_mission uam on iu.user_id = uam.user_id
         inner join ijob_mission im on uam.mission_id = im.mission_id
         where
-        ijob_user.user_id =#{userId}
+            iu.user_id =#{userId}
     </select>
+
     <select id="selectUserWithCourseById" parameterType="String" resultMap="withCourseResultMap">
-        select *,
+        select *
         from
         <include refid="table_name"></include>
         inner join user_course uac on ijob_user.user_id = uac.user_id
@@ -92,16 +93,16 @@
         where
         ijob_user.user_id =#{userId}
     </select>
-    <insert id="insertUAC" parameterType="UAC">
-        insert into user_course (user_id, course_id)
-        values (#{userId},#{courseId});
-    </insert>
-    <select id="getUAC" parameterType="UAC" resultType="UAC">
-        SELECT user_id,course_id
-        FROM user_course
-        WHERE user_id = #{userId}
-        and course_id=#{courseId}
+    <select id="selectMissionByMissionId" parameterType="String" resultType="User">
+        select iu.user_id,im.*
+        from
+        ijob_user iu
+        inner join user_mission uam on iu.user_id = uam.user_id
+        INNER JOIN ijob_mission im ON uam.mission_id = im.mission_id
+        where
+        im.mission_id= #{missionId}
     </select>
+
     <resultMap id="BaseMap" type="User">
         <id column="user_id" property="userId"/>
         <result property="userName" column="user_name"/>

@@ -21,18 +21,13 @@ import java.util.List;
 public class CourseController {
     @Resource
     private CourseService courseService;
+
     @RequestMapping(value = "/allCourse")
     public String allCourse(@RequestParam(value="currentPage",defaultValue="1",required = false)int currentPage, Model model){
         model.addAttribute("pagemsg",courseService.findByPage(currentPage));
         return "employee/allCourse";
     }
-//    @RequestMapping(value = "/search")
-//    @ResponseBody
-//    public List<Course> search(@PathVariable("courseName") String courseName, HttpSession session){
-//        List<Course> courses = courseService.findAllByCourseName(courseName);
-//       session.setAttribute("courses",courses);
-//       return  courses;
-//    }
+
     @RequestMapping(value = "/selectCourseByName/{courseName}")
     public String selectCourseByName(@PathVariable("courseName") String courseName, Model model){
         Course course = courseService.selectCourseByName(courseName);
@@ -49,4 +44,5 @@ public class CourseController {
     public String toTeach(){
         return "employee/teach";
     }
+
 }

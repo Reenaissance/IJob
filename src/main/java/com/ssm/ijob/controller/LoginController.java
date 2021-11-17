@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
     @Resource
     private UserService userService;
+
     //登录功能
     @PostMapping(value = "/login")
     @ModelAttribute
@@ -40,11 +42,12 @@ public class LoginController {
             if(user1.getUserPrivileges().equals("管理员")){
                 modelAndView.setView(new RedirectView("/IJob/admin"));
                 session.setAttribute("userId",user1.getUserId());
+                session.setAttribute("userName",user1.getUserName());
                 session.setAttribute("userPrivileges",user1.getUserPrivileges());
             }
             //委托人
             else if(user1.getUserPrivileges().equals("委托员")){
-                modelAndView.setView(new RedirectView("/IJob/selectUserById/"+user1.getUserId()));
+                modelAndView.setView(new RedirectView("/IJob/employer"));
                 session.setAttribute("userId",user1.getUserId());
                 session.setAttribute("userName",user1.getUserName());
                 session.setAttribute("userPrivileges",user1.getUserPrivileges());
@@ -57,10 +60,13 @@ public class LoginController {
         }
         return modelAndView;
     }
-    //登出
-    @RequestMapping(value = "/logout")
+    @RequestMapping(value="/logout.action")
     public String logout(HttpSession session){
         session.invalidate();
-        return "redirect:login";
+        return "redirect:login.action";
+    }
+    @RequestMapping(value="/login.action",method = RequestMethod.GET)
+    public String toLogin(){
+        return "login";
     }
 }

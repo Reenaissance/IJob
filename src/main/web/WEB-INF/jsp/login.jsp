@@ -7,18 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<%--<head>--%>
-<%--    <title>IJOb</title>--%>
-<%--</head>--%>
-<%--<body>--%>
-<%--<table>--%>
-<%--    <tr>--%>
-<%--        <td><a href="index11.jsp">首页</a></td>--%>
-<%--        <td><a href="/IJob/mission">委托</a></td>--%>
-<%--        <td><a href="/IJob/course">教学</a></td>--%>
-<%--    </tr>--%>
-<%--</table>--%>
-<%--</body>--%>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>IJob - 登录页面</title>
@@ -81,7 +69,6 @@
             </div>
 
             <div class="form-group" align="center">
-
                 <button type="submit" class="btn btn-info btn-block" style="width: 100px" >登录</button>
             </div>
         </form>

@@ -14,6 +14,7 @@ public interface MissionMapper {
     int insertMission(Mission mission);
     int deleteMissionById(String missionId);
     int updateMissionById(Mission mission);
+    int updateMissionStatus(String missionId);
     Mission selectMissionById(String missionId);
     Mission selectMissionDetail(String missionId);
     List<Mission> selectMissionAll();

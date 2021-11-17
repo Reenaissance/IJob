@@ -12,15 +12,15 @@ import java.util.List;
  */
 public interface UserService {
     User selectUserById(String userId);
+    User selectUserByName(String userName);
     int insertUser(User user);
     int deleteUserById(String id);
     int updateUserById(User user);
     List<User> selectUserAll();
     User selectUserWithMissionById(String id);
     User selectUserWithCourseById(String id);
+    User selectMissionByMissionId(String missionId);
     User selectLoginIdPass(@Param("userId") String userId, @Param("userPassword") String userPassword);
     User selectLoginPrivilege(@Param("userId") String userId, @Param("userPrivileges") String userPrivileges);
-    int insertUAC (UAC uac);
-    int deleteUAC(UAC uac);
-    UAC getUAC(@Param("userId") String userId, @Param("courseId") String courseId);
+
 }

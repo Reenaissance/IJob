@@ -35,28 +35,31 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" >在线教育平台-管理员-日志浏览</a>
+            <a class="navbar-brand" >IJob-管理员</a>
         </div>
         <div class="collapse navbar-collapse" id="example-navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="admin">用户管理</a></li>
-                <li><a href="admin_course">课程管理</a></li>
-                <li class="active"><a href="admin_log">操作日志</a></li>
+                <li><a href="${pageContext.request.contextPath}/allUser">用户管理</a></li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin/allCourse">课程管理</a>
+                </li>
+                <li>
+                    <a href="#">课程反馈</a>
+                </li>
+
             </ul>
+<%--            <%=session.getAttribute("userName")%>--%>
             <ul class="nav navbar-nav navbar-right">
-                <li id="hoverLi1"><a href="./register">|注册|</a></li>
-                <li id="hoverLi2"><a href="#">|退出|</a> </li>
+                <li id="hoverLi1"><a href="#">管理员:${sessionScope.userName}</a></li>
+                <li id="hoverLi2">
+                    <a href="${pageContext.request.contextPath}/logout.action">|退出|</a>
+                </li>
                 <li id="hoverLi3" class="ShowUserInfo"><a >|当前在线状态|</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
-<div id="UserInfo">
-    <p>用户类型：<%=session.getAttribute("userPrivileges")%></p>
-    <p>用户账号：<%=session.getAttribute("userId")%></p>
-    <p>用户名：<%=session.getAttribute("userName")%></p>
-</div>
 
 </body>
 
