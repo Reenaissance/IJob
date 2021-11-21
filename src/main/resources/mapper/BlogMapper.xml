@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-/mybatis.orgl/DTD.Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.ssm.ijob.mapper.BlogMapper" >
+
+    <insert id="addBlog" parameterType="Blog">
+        insert into ijob.ijob_blog (blog_id, blog_userId, blog_title, blog_context, blog_date)
+        values (#{blogId}, #{blogUserId}, #{blogTitle}, #{blogContext}, #{blogDate});
+    </insert>
+
+    <delete id="deleteBlog" parameterType="Integer">
+        delete from ijob.ijob_blog where blog_id = #{blogId};
+    </delete>
+
+    <update id="updateBlog" parameterType="Blog">
+        update ijob.ijob_blog set blog_title = #{blogTitle},
+                                  blog_context = #{blogContext},
+                                  blog_date = #{blogDate}
+        where blog_id = #{blogId};
+    </update>
+
+    <update id="updateBlogId">
+        update ijob.ijob_blog set blog_Id = #{newId}
+        where blog_id = #{oldId};
+    </update>
+
+
+    <select id="queryBlog" parameterType="Integer" resultMap="BlogMap">
+        select * from ijob.ijob_blog where blog_Id = #{blogId};
+    </select>
+
+    <select id="queryAllBlog" resultMap="BlogMap">
+        select * from ijob.ijob_blog;
+    </select>
+
+    <select id="queryBlogByUser" resultMap="BlogMap">
+        select * from ijob.ijob_blog where blog_userId = #{blogUserId};
+    </select>
+
+    <select id="queryBlogNum" resultType="Integer">
+        select count(*) from ijob.ijob_blog;
+    </select>
+
+
+    <resultMap id="BlogMap" type="Blog">
+        <id column="blog_id" property="blogId" />
+        <result column="blog_userId" property="blogUserId" />
+        <result column="blog_title" property="blogTitle" />
+        <result column="blog_context" property="blogContext" />
+        <result column="blog_date" property="blogDate" />
+    </resultMap>
+</mapper>

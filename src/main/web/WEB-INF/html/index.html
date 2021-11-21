@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<link rel="stylesheet" href="/css/bootstrap.min.css" />
+	<script type="text/javascript" src="/js/jquery-3.3.1.min.js" ></script>
+	<script type="text/javascript" src="/js/bootstrap.min.js" ></script>
+	<link href="/css/admin.css" rel="stylesheet"/>
+		
+	<link href="/plugins/fullPage/jquery.fullPage.css" rel="stylesheet"/>
+	<link href="/plugins/bootstrap-3.3.0/css/bootstrap.min.css" rel="stylesheet"/>
+	<link href="/plugins/material-design-iconic-font-2.2.0/css/material-design-iconic-font.min.css" rel="stylesheet"/>
+	<link href="/plugins/waves-0.7.5/waves.min.css" rel="stylesheet"/>
+	<link href="/plugins/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+	<link href="/css/admin.css" rel="stylesheet"/>
+		
+	<style>
+		#header {background: #29A176;}
+	</style>
+</head>
+<body>
+	<header id="header">
+		<ul id="menu">
+			<li id="guide" class="line-trigger">
+				<div class="line-wrap">
+					<div class="line top"></div>
+					<div class="line center"></div>
+					<div class="line bottom"></div>
+				</div>
+			</li>
+			<li id="logo" class="hidden-xs">
+				<a href="index.html">
+				</a>
+				<span id="system_title">IJob</span>
+			</li>
+			<li class="pull-right">
+				<span class="fl" th:if="${session.user == null}">你好，请<a href="/login.action" style="color:#ff4e00;">登录</a>&nbsp;<a href="/register" style="color:#ff4e00;">免费注册</a>&nbsp;&nbsp;</span>
+				<!-- <span class="fl" th:if="${session.user != null}"><a href="/user/userInfo" >欢迎回来，<span th:text="${session.user.userName}"></span></a>&nbsp;|&nbsp;<a href="/orders/list">我的订单</a>&nbsp;</span>
+				<span class="fl" th:if="${session.user != null}">|&nbsp;<a href="/user/logout">注销</a></span> -->
+			</li> 
+		</ul>
+	</header>
+	<section id="main">
+		<!-- 左侧导航区 -->
+		<aside id="sidebar">
+			<!-- 菜单区 -->
+			<ul class="main-menu">
+				<li>
+				<a class="waves-effect" href=""><i class="zmdi zmdi-home"></i> 委托 </a>
+				</li>
+				<li >
+				<a class="waves-effect" href=""><i class="zmdi zmdi-accounts-list"></i> 评论区 </a>
+				</li>
+				<li >
+				<a class="waves-effect" href=""><i class="zmdi zmdi-accounts"></i> 个人博客 </a>
+				</li>
+				<li >
+				<a class="waves-effect" href=""><i class="zmdi zmdi-lock-outline"></i> 教学板块 </a>
+				</li>
+			</ul>
+			<!-- /菜单区 -->
+		</aside>
+		<!-- /左侧导航区 -->
+		
+		<section id="content">
+			<div class="content_main" style="overflow:scroll;">
+				<div style="height: 40px;padding-top: 10px;">
+				<button class="button"> 我要写博客 </button>
+				</div>
+				<div class="iframe cur" >
+					
+				</div>
+			</div>
+		</section>
+	</section>
+<script src="/plugins/jquery.1.12.4.min.js"></script>
+<script src="/plugins/bootstrap-3.3.0/js/bootstrap.min.js"></script>
+<script src="/plugins/waves-0.7.5/waves.min.js"></script>
+<script src="/plugins/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/plugins/BootstrapMenu.min.js"></script>
+<script src="/plugins/device.min.js"></script>
+<script src="/plugins/fullPage/jquery.fullPage.min.js"></script>
+<script src="/plugins/fullPage/jquery.jdirk.min.js"></script>
+<script src="/plugins/jquery.cookie.js"></script>
+<script src="/js/admin.js"></script>
+</body>
+</html>
